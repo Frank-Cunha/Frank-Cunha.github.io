@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Franklin Cunha — Desenvolvimento de Software</title>
+<meta name="description" content="Franklin dos Santos Cunha, estudante de Ciência da Computação no IDP, campeão do Hackathon e do Projeto Integrado IDP 2026. Em busca de estágio em desenvolvimento de software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F7FA;
+    --white:#FFFFFF;
+    --ink:#18213A;
+    --slate:#56607A;
+    --line:#DCE1EA;
+    --orange:#EE7A1C;
+    --orange-deep:#B85A0C;
+    --tint:#E7EEFB;
+    --display:"Bricolage Grotesque", system-ui, sans-serif;
+    --body:"Public Sans", system-ui, sans-serif;
+    --wrap:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+  body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+  h1,h2,h3{font-family:var(--display);margin:0;line-height:1.05;letter-spacing:-.02em}
+  h2{font-size:clamp(2rem,4vw,2.9rem);font-weight:800}
+  h3{font-size:1.35rem;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+  p{margin:0}
+  .muted{color:var(--slate)}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(245,247,250,.88);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+  .nav.scrolled{border-bottom-color:var(--line)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .mark{font-family:var(--display);font-weight:800;font-size:1.15rem;text-decoration:none}
+  .mark span{color:var(--orange)}
+  .nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:.95rem}
+  .nav ul a{text-decoration:none;color:var(--slate)}
+  .nav ul a:hover{color:var(--ink)}
+  @media (max-width:720px){.nav ul{display:none}}
+
+  /* hero */
+  .hero{padding:72px 0 56px}
+  .hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(3.2rem,8.5vw,6.6rem);font-weight:800;letter-spacing:-.045em;line-height:.92}
+  .hero h1 .last{display:block;color:transparent;-webkit-text-stroke:2px var(--ink)}
+  .lede{font-size:1.22rem;max-width:34ch;margin-top:28px;color:var(--ink)}
+  .lede-sub{margin-top:12px;max-width:46ch}
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;font-weight:600;font-size:.98rem;text-decoration:none;border:1.5px solid var(--ink);transition:background .15s,color .15s}
+  .btn svg{width:18px;height:18px}
+  .btn.primary{background:var(--ink);color:var(--white)}
+  .btn.primary:hover{background:var(--orange-deep);border-color:var(--orange-deep)}
+  .btn.ghost:hover{background:var(--ink);color:var(--white)}
+
+  .portrait{position:relative;justify-self:end;width:100%;max-width:390px}
+  .portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%;border-radius:200px 200px 24px 24px}
+  .seal{position:absolute;left:-34px;bottom:34px;width:132px;height:132px;border-radius:50%;background:var(--orange);color:var(--white);display:grid;place-items:center;text-align:center;font-family:var(--display);box-shadow:0 0 0 8px var(--paper)}
+  .seal b{display:block;font-size:2.6rem;line-height:.9;font-weight:800}
+  .seal small{display:block;font-size:.78rem;line-height:1.2;font-weight:600;padding:0 16px;margin-top:4px}
+  @media (max-width:860px){
+    .hero{padding-top:40px}
+    .hero .wrap{grid-template-columns:1fr;gap:44px}
+    .portrait{justify-self:start;max-width:260px;margin-left:34px}
+  }
+
+  /* sections */
+  section{padding:88px 0}
+  .sec-head{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:end;margin-bottom:48px}
+  .sec-head p{max-width:52ch}
+  @media (max-width:860px){.sec-head{grid-template-columns:1fr;gap:16px}}
+
+  /* trophies */
+  #conquistas{background:var(--ink);color:var(--white)}
+  #conquistas .muted{color:#AEB7CC}
+  .win{display:grid;grid-template-columns:1.35fr 1fr;gap:44px;align-items:center;margin-bottom:72px}
+  .win.flip{grid-template-columns:1fr 1.35fr}
+  .win.flip .win-media{order:2}
+  .win-place{font-family:var(--display);font-weight:800;font-size:clamp(4.5rem,10vw,7.5rem);line-height:.8;color:var(--orange);letter-spacing:-.05em}
+  .win-place sup{font-size:.42em;vertical-align:.95em;margin-left:2px}
+  .win h3{font-size:clamp(1.6rem,3vw,2.2rem);margin-top:18px;font-weight:800;line-height:1.08}
+  .win .when{margin-top:10px;font-size:.95rem}
+  .win p.body{margin-top:18px;max-width:44ch;color:#DDE3F0}
+  .photo{position:relative;border-radius:18px;overflow:hidden;cursor:zoom-in;padding:0;border:0;background:#0f1628;width:100%}
+  .photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .photo:hover img{transform:scale(1.03)}
+  .photo .cap{position:absolute;left:12px;bottom:12px;background:rgba(24,33,58,.82);color:#fff;font-size:.82rem;padding:6px 10px;border-radius:8px;text-align:left}
+  .win-media .photo{aspect-ratio:4/3}
+  .pair{display:grid;grid-template-columns:1.3fr .7fr;gap:14px}
+  .pair .photo:first-child{aspect-ratio:4/3}
+  .pair .photo:last-child{aspect-ratio:3/4.2}
+  .obi{border-top:1px solid #34405e;padding-top:40px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start}
+  .obi .tag{font-family:var(--display);font-weight:800;font-size:2.4rem;color:var(--orange);line-height:1}
+  .obi p{color:#DDE3F0;max-width:60ch;margin-top:8px}
+  @media (max-width:860px){
+    .win,.win.flip{grid-template-columns:1fr;gap:28px}
+    .win.flip .win-media{order:0}
+    .obi{grid-template-columns:1fr;gap:8px}
+  }
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:repeat(2,1fr);border-top:1.5px solid var(--ink)}
+  .skill{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .skill:nth-child(odd){padding-right:32px}
+  .skill:nth-child(even){padding-left:32px;border-left:1px solid var(--line)}
+  .skill dt{font-weight:600;color:var(--slate);font-size:.95rem;padding-top:4px}
+  .skill dd{margin:0;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;align-content:flex-start}
+  .chip{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:5px 11px;font-size:.95rem;font-weight:500}
+  .chip.lang{background:var(--tint);border-color:#C9D7F2}
+  @media (max-width:860px){
+    .skills{grid-template-columns:1fr}
+    .skill:nth-child(odd),.skill:nth-child(even){padding-left:0;padding-right:0;border-left:0}
+    .skill{grid-template-columns:1fr;gap:10px}
+  }
+
+  /* timeline */
+  #trajetoria{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .timeline{list-style:none;margin:0;padding:0;position:relative}
+  .timeline::before{content:"";position:absolute;left:170px;top:8px;bottom:8px;width:2px;background:var(--line)}
+  .timeline li{display:grid;grid-template-columns:170px 1fr;gap:0;padding:0 0 40px;position:relative}
+  .timeline li:last-child{padding-bottom:0}
+  .timeline time{font-weight:600;color:var(--slate);font-size:.95rem;padding-top:2px;padding-right:28px}
+  .timeline .item{padding-left:36px;position:relative}
+  .timeline .item::before{content:"";position:absolute;left:-6px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--white);border:3px solid var(--ink)}
+  .timeline li.hl .item::before{background:var(--orange);border-color:var(--orange)}
+  .timeline .org{color:var(--slate);margin-top:4px}
+  .timeline ul{margin:12px 0 0;padding-left:18px;max-width:62ch}
+  .timeline ul li{display:list-item;padding:0 0 6px}
+  .timeline ul li::marker{color:var(--orange)}
+  @media (max-width:720px){
+    .timeline::before{left:6px}
+    .timeline li{grid-template-columns:1fr}
+    .timeline time{padding-left:36px;padding-bottom:4px}
+  }
+
+  /* contact */
+  #contato h2{font-size:clamp(2.4rem,6vw,4.4rem);max-width:14ch;letter-spacing:-.035em}
+  .contacts{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1.5px solid var(--ink)}
+  .contact{padding:22px 20px 22px 0;text-decoration:none;display:block;border-bottom:1px solid var(--line)}
+  .contact + .contact{padding-left:20px;border-left:1px solid var(--line)}
+  .contact .k{font-size:.92rem;color:var(--slate);display:flex;align-items:center;gap:8px}
+  .contact .k svg{width:17px;height:17px}
+  .contact .v{font-weight:600;margin-top:6px;word-break:break-word}
+  .contact:hover .v{color:var(--orange-deep);text-decoration:underline;text-underline-offset:3px}
+  @media (max-width:860px){
+    .contacts{grid-template-columns:1fr 1fr}
+    .contact + .contact{padding-left:0;border-left:0}
+    .contact:nth-child(even){padding-left:20px;border-left:1px solid var(--line)}
+  }
+  @media (max-width:520px){
+    .contacts{grid-template-columns:1fr}
+    .contact:nth-child(even){padding-left:0;border-left:0}
+  }
+  footer{padding:32px 0 48px;font-size:.9rem;color:var(--slate)}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:50;background:rgba(10,14,28,.92);display:none;align-items:center;justify-content:center;padding:28px}
+  .lb.open{display:flex}
+  .lb img{max-height:86vh;max-width:min(1200px,94vw);border-radius:12px;animation:pop .25s ease}
+  .lb figcaption{color:#DDE3F0;text-align:center;margin-top:12px;font-size:.95rem}
+  .lb button{position:absolute;top:18px;right:18px;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:10px 16px;font:600 .95rem var(--body);cursor:pointer}
+  @keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+
+  /* single load moment */
+  .hero h1 .first,.hero h1 .last{display:block;animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+  .hero h1 .last{animation-delay:.12s}
+  .seal{animation:stamp .5s cubic-bezier(.3,1.6,.5,1) .55s both}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  @keyframes stamp{from{opacity:0;transform:scale(.6) rotate(-14deg)}to{opacity:1;transform:rotate(-8deg)}}
+  .seal{transform:rotate(-8deg)}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav" aria-label="Seções">
+  <div class="wrap">
+    <a class="mark" href="#topo">franklin<span>.</span>cunha</a>
+    <ul>
+      <li><a href="#conquistas">Conquistas</a></li>
+      <li><a href="#competencias">Competências</a></li>
+      <li><a href="#trajetoria">Trajetória</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="topo">
+  <div class="wrap">
+    <div>
+      <h1><span class="first">Franklin</span><span class="last">Cunha</span></h1>
+      <p class="lede">Estudante de Ciência da Computação no IDP, procurando estágio em desenvolvimento de software.</p>
+      <p class="lede-sub muted">Gosto de lógica, algoritmos e de construir coisas em equipe sob prazo apertado. No meu primeiro semestre, nosso time venceu o Hackathon e o Projeto Integrado do IDP.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://www.linkedin.com/in/franklin-santos-cunha-9ba696428/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          Ver LinkedIn
+        </a>
+        <a class="btn ghost" href="https://github.com/Frank-Cunha" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+          Ver GitHub
+        </a>
+        <a class="btn ghost" href="#contato">Entrar em contato</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <img src="img/retrato.jpg" alt="Retrato de Franklin Cunha, de óculos e camiseta azul-marinho" width="400" height="400">
+      <div class="seal" aria-label="Duas vezes campeão no IDP em 2026"><div><b>2×</b><small>campeão no IDP em 2026</small></div></div>
+    </div>
+  </div>
+</header>
+
+<section id="conquistas" aria-labelledby="h-conq">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-conq">Conquistas</h2>
+      <p class="muted">Três resultados de 2026, meu primeiro ano na graduação. Clique nas fotos para ampliar.</p>
+    </div>
+
+    <article class="win">
+      <div class="win-media">
+        <button class="photo" data-full="img/principal.jpg" data-cap="Equipe campeã do Projeto Integrado IDP, 1º semestre de 2026">
+          <img src="img/principal.jpg" alt="Equipe de sete estudantes segurando os troféus laranja de Melhor Projeto Integrado" loading="lazy">
+          <span class="cap">Troféu de Melhor Projeto Integrado</span>
+        </button>
+      </div>
+      <div>
+        <div class="win-place">1<sup>º</sup></div>
+        <h3>Campeão do Projeto Integrado IDP</h3>
+        <p class="when muted">1º semestre de 2026</p>
+        <p class="body">Concebemos e implementamos um software aplicando lógica e desenvolvimento de sistemas. Foi avaliado como o melhor projeto do semestre.</p>
+      </div>
+    </article>
+
+    <article class="win flip">
+      <div class="win-media pair">
+        <button class="photo" data-full="img/foto3.jpg" data-cap="Equipe vencedora do Hackathon IDP com a organização do evento">
+          <img src="img/foto3.jpg" alt="Equipe vencedora do Hackathon agachada à frente, com os organizadores do evento atrás" loading="lazy">
+        </button>
+        <button class="photo" data-full="img/foto2.jpg" data-cap="Franklin (segundo da esquerda) e equipe com as placas de 1º lugar do Hackathon IDP">
+          <img src="img/foto2.jpg" alt="Quatro integrantes da equipe exibindo as placas de primeiro lugar do Hackathon" loading="lazy">
+        </button>
+      </div>
+      <div>
+        <div class="win-place">1<sup>º</sup></div>
+        <h3>Campeão do Hackathon IDP</h3>
+        <p class="when muted">1º semestre de 2026</p>
+        <p class="body">Uma maratona de programação com prazo curto. Atuei direto na arquitetura e na codificação da solução que o time apresentou e venceu.</p>
+      </div>
+    </article>
+
+    <div class="obi">
+      <div class="tag">OBI</div>
+      <div>
+        <h3>Classificado para a 2ª fase da Olimpíada Brasileira de Informática</h3>
+        <p>Competição nacional de resolução de problemas lógico-matemáticos com algoritmos eficientes. 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="competencias" aria-labelledby="h-comp">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-comp">Competências</h2>
+      <p class="muted">O que uso hoje nos projetos da faculdade e nos estudos por conta própria.</p>
+    </div>
+    <dl class="skills">
+      <div class="skill"><dt>Linguagens</dt><dd><span class="chip lang">C</span><span class="chip lang">Python</span><span class="chip lang">JavaScript</span><span class="chip lang">Kotlin</span></dd></div>
+      <div class="skill"><dt>Banco de dados</dt><dd><span class="chip">MySQL</span></dd></div>
+      <div class="skill"><dt>Ferramentas</dt><dd><span class="chip">Node.js</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Raylib</span><span class="chip">Pacote Office</span></dd></div>
+      <div class="skill"><dt>Sistemas</dt><dd><span class="chip">Windows</span><span class="chip">Linux</span></dd></div>
+      <div class="skill"><dt>Idiomas</dt><dd><span class="chip">Português nativo</span><span class="chip">Inglês intermediário, foco em leitura técnica</span></dd></div>
+      <div class="skill"><dt>Base</dt><dd><span class="chip">Lógica de programação</span><span class="chip">Algoritmos</span><span class="chip">Estruturas de dados</span></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="trajetoria" aria-labelledby="h-traj">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-traj">Trajetória</h2>
+      <p class="muted">Do atendimento técnico na Samsung à Ciência da Computação.</p>
+    </div>
+    <ol class="timeline">
+      <li class="hl">
+        <time>2026</time>
+        <div class="item">
+          <h3>Hackathon, Projeto Integrado e OBI</h3>
+          <p class="org">Primeiro lugar em duas competições do IDP e classificação para a 2ª fase da OBI.</p>
+        </div>
+      </li>
+      <li>
+        <time>03/2026 – 12/2029</time>
+        <div class="item">
+          <h3>Bacharelado em Ciência da Computação</h3>
+          <p class="org">IDP – Instituto Brasileiro de Ensino, Desenvolvimento e Pesquisa · conclusão prevista</p>
+        </div>
+      </li>
+      <li>
+        <time>10/2024 – 02/2026</time>
+        <div class="item">
+          <h3>Consultor Galaxy</h3>
+          <p class="org">Samsung</p>
+          <ul>
+            <li>Atendimento consultivo sobre o ecossistema de dispositivos e soluções da marca.</li>
+            <li>Comunicação clara, inteligência emocional e resolução rápida de problemas sob pressão: habilidades que levo para o trabalho em equipe de software.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="contato" aria-labelledby="h-cont">
+  <div class="wrap">
+    <h2 id="h-cont">Vamos conversar sobre a vaga?</h2>
+    <p class="muted" style="margin-top:16px;max-width:50ch">Estou em Brasília (DF) e disponível para estágio. O jeito mais rápido de falar comigo é por e-mail ou WhatsApp.</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:franklinfsc41@gmail.com">
+        <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>E-mail</span>
+        <span class="v">franklinfsc41@gmail.com</span>
+      </a>
+      <a class="contact" href="https://wa.me/5561994472053" target="_blank" rel="noopener">
+        <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg>WhatsApp</span>
+        <span class="v">(61) 99447-2053</span>
+      </a>
+      <a class="contact" href="https://www.linkedin.com/in/franklin-santos-cunha-9ba696428/" target="_blank" rel="noopener">
+        <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 7.5v.01M12 17v-6M12 13.5c0-1.4 1-2.5 2.4-2.5S16 12 16 13.5V17"/></svg>LinkedIn</span>
+        <span class="v">franklin-santos-cunha</span>
+      </a>
+      <a class="contact" href="https://github.com/Frank-Cunha" target="_blank" rel="noopener">
+        <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></svg>GitHub</span>
+        <span class="v">github.com/Frank-Cunha</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Franklin dos Santos Cunha · Brasília, DF · 2026</div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button type="button" id="lb-close">Fechar</button>
+  <figure style="margin:0">
+    <img id="lb-img" alt="">
+    <figcaption id="lb-cap"></figcaption>
+  </figure>
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), {passive:true});
+
+  const lb = document.getElementById('lb'), lbImg = document.getElementById('lb-img'),
+        lbCap = document.getElementById('lb-cap'), lbClose = document.getElementById('lb-close');
+  let lastFocus = null;
+  document.querySelectorAll('.photo').forEach(btn => {
+    btn.addEventListener('click', () => {
+      lastFocus = btn;
+      lbImg.src = btn.dataset.full;
+      lbImg.alt = btn.querySelector('img').alt;
+      lbCap.textContent = btn.dataset.cap || '';
+      lb.classList.add('open');
+      lbClose.focus();
+    });
+  });
+  function closeLb(){ lb.classList.remove('open'); if (lastFocus) lastFocus.focus(); }
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) closeLb(); });
+</script>
+</body>
+</html>
